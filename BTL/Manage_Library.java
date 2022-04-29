@@ -104,7 +104,12 @@ class Library{
         quantity = 0;
         capacity = 1000;
     }
-
+    public int getCap() {
+        return capacity;
+    }
+    public int getQuan() {
+        return quantity;
+    }
     public void add_UserBookLent(User_Book_Lent userbooklent){
         UBookLents.add(userbooklent);
     }
@@ -117,8 +122,10 @@ class Library{
         books.add(bookNeedAdd);
         quantity++;
     }
-
-    public boolean readBook(){
+    public boolean readAdmins() {
+        return false;
+    }
+    public boolean readBooks(){
         try {
             FileInputStream booksF = new FileInputStream("books.txt");
             // FileInputStream usersF = new FileInputStream("users.txt");
@@ -175,7 +182,7 @@ class Library{
         }
         return stringOfBook;
     }
-    public boolean saveBook(){
+    public boolean saveBooks(){
         try {
             FileOutputStream booksF = new FileOutputStream("books.txt");
             booksF.write(("").getBytes());
@@ -205,7 +212,7 @@ class Library{
 public class Manage_Library {
     public static void main(String[] args){
         Library newLib = new Library();
-        newLib.readBook();
+        newLib.readBooks();
         Book book1 = new Book(1,"a","A",false);
         Book book2 = new Book(2,"b","B",false);
         Book book3 = new Book(3,"c","C",false);
@@ -213,7 +220,7 @@ public class Manage_Library {
         // newLib.add_Book(book2);
         newLib.delete_Book(book2);
 
-        newLib.saveBook();
+        newLib.saveBooks();
 
 
 
