@@ -49,11 +49,15 @@ class Book{
 }
 
 class User_Book_Lent{
-    private int Id_user;
+    private int Id_Book;
     private String Name_user;
-    public User_Book_Lent(int id_u, String name_u){
-        Id_user = id_u;
-        Name_user = name_u;
+    private String Date;
+    User_Book_Lent(){
+    }
+    public User_Book_Lent(int id_u, String name_u, String date){
+        this.Id_user = id_u;
+        this.Name_user = name_u;
+        this.Date = date;
     }
     public int getId_user(){
         return Id_user;
@@ -61,22 +65,20 @@ class User_Book_Lent{
     public String getName_user(){
         return Name_user;
     }
+    public String getDate(){
+        return Date;
+    }
 }
 
 class Admin{
-    String Name;
-    String Passwork;
-    Hashtable<Integer, String> User_Book_Lent; // Lưu id, và tên của user mượn sách.
+    private String Name;
+    private String Passwork;    
 }
-class User{
-    String Name;
-    String Passwork;
-    Vector<Integer> Book_Borrowed; // Tên sách mà user mượn. Tối đa 5 quyển sách.
-}
+
+
 class Library{
     private Vector<Book> books;
-    private Vector<Admin> admins;
-    // viết thêm 1 véc tơ kiểu class User_Book_Lent
+    private Admin admins;
     private Vector<User_Book_Lent> UBookLents;
 
     private int quantity;
@@ -84,14 +86,11 @@ class Library{
 
     public Library(){
         books = new Vector<Book>();
-        admins = new Vector<Admin>();
+        admins = new Admin();
         UBookLents = new Vector<User_Book_Lent>();
         quantity = 0;
         capacity = 1000;
     }
-
-
-
 
     public void add_UserBookLent(User_Book_Lent userbooklent){
         UBookLents.add(userbooklent);
@@ -123,7 +122,6 @@ class Library{
                     if (i == 3) {
                             bookCur.setBorrowed(Integer.parseInt(tokens[i]) == 0 ? false : true);
                     }
-                    // i = i + 1;
                 }
                 add_Book(bookCur);
             }
