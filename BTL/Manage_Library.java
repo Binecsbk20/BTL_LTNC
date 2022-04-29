@@ -49,21 +49,24 @@ class Book{
 }
 
 class User_Book_Lent{
-    private int Id_Book;
-    private String Name_user;
+    private int bookID;
+    private String userName;
     private String Date;
     User_Book_Lent(){
+        bookID = -1;
+        userName = "";
+        Date = "";
     }
     public User_Book_Lent(int id_u, String name_u, String date){
-        this.Id_user = id_u;
-        this.Name_user = name_u;
+        this.bookID = id_u;
+        this.userName = name_u;
         this.Date = date;
     }
-    public int getId_user(){
-        return Id_user;
+    public int getID(){
+        return bookID;
     }
     public String getName_user(){
-        return Name_user;
+        return userName;
     }
     public String getDate(){
         return Date;
@@ -71,10 +74,20 @@ class User_Book_Lent{
 }
 
 class Admin{
-    private String Name;
-    private String Passwork;    
-}
+    private String name;
+    private String pass;    
+    public Admin() {
+        this.name = "";
+        this.pass = "";
+    }
+    public Admin(String n, String p) {
+        this.name = n;
+        this.pass = p;
+    }
+    // public void lentBook() {
 
+    // }
+}
 
 class Library{
     private Vector<Book> books;
@@ -189,7 +202,7 @@ class Library{
     
 }
 
-public class Main {
+public class Manage_Library {
     public static void main(String[] args){
         Library newLib = new Library();
         newLib.readBook();
