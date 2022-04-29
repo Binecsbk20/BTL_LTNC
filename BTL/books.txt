@@ -1,0 +1,50 @@
+1@Pride and Prejudice@Jane Austen@0
+2@The Lord of the Rings@JRR Tolkien@0
+3@Jane Eyre@Charlotte Bronte@0
+4@Harry Potter series@JK Rowling@0
+5@To Kill a Mockingbird@Harper Lee@0
+6@The Remains of the Day@Kazuo Ishiguro@0
+7@Wuthering Heights@Emily Bronte@0
+8@Nineteen Eighty Four@George Orwell@0
+9@His Dark Materials@Philip Pullman@0
+10@Great Expectations@Charles Dickens@0
+11@Little Women@Louisa M. Alcott@0
+12@Tess of the D'Urbervilles@Thomas Hardy@0
+13@Catch 22@Joseph Heller@0
+14@Hamlet@William Shakespeare@0
+15@Rebecca@Daphne Du Maurier@0
+16@The Hobbit@JRR Tolkien@0
+17@Birdsong@Sebastian Faulk@0
+18@Catcher in the Rye@JD Salinger@0
+19@The Time Traveler's Wife@Audrey Niffenegger@0
+20@Middlemarch@George Eliot@0
+21@Gone With The Wind@Margaret Mitchell@0
+22@The Great Gatsby@F Scott Fitzgerald@0
+24@War and Peace@Leo Tolstoy@0
+25@The Hitch Hiker's Guide to the Galaxy@Douglas Adams@0
+27@Crime and Punishmen@ Fyodor Dostoyevsky@0
+28@Grapes of Wrath@John Steinbeck@0
+29@Alice in Wonderland@Lewis Caroll@0
+30@The Wind in the Willows@Kenneth Grahame@0
+31@Anna Karenina@Leo Tolstoy@0
+32@David Copperfield@Charles Dickens@0
+33@Chronicles of Narnia@C.S. Lewis@0
+34@Emma@Jane Austen@0
+35@Persuasion@Jane Austen@0
+36@The Lion, The Witch and the Wardrobe@C.S. Lewis@0
+37@The Kite Runner@Khaled Hosseini@0
+38@Captain Corelli's Mandolin@Louis De Bernieres@0
+39@Memoirs of a Geisha@Arthur Golden@0
+40@Winnie the Pooh@A.A. Milne@0
+41@Animal Farm@George Orwell@0
+42@The Da Vinci Code@Dan Brown@0
+43@One Hundred Years of Solitude@Gabriel Garcia Marquez@0
+44@A Prayer for Owen Meaney@John Irving@0
+45@The Woman in White@Wilkie Collins@0
+46@Anne of Green Gables@LM Montgomery@0
+47@Far From The Madding Crowd@Thomas Hardy@0
+48@The Handmaid's Tale@Margaret Atwood@0
+49@Lord of the Flies@William Golding@0
+50@Atonement@Ian McEwan@0
+2@b@B@0
+2@b@B@0
