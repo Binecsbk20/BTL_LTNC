@@ -6,17 +6,17 @@ class Book{
     private String writerName;
     private boolean borrowed;
 
-    public String getName(){
-        return bookName;
+    public Book() {
+        bookId = -1;
+        bookName = "";
+        writerName = "";
+        borrowed = false;
     }
-    public String getwriterName(){
-        return writerName;
-    }
-    public int getID(){
-        return bookId;
-    }
-    public boolean isBorrowed() {
-        return borrowed;
+    public Book(int id, String bN, String wN, boolean isBr){
+        bookId = id;
+        bookName = bN;
+        writerName = wN;
+        borrowed = isBr;
     }
 
     public void setID(int id) {
@@ -28,31 +28,32 @@ class Book{
     public void setWritername(String wN) {
         writerName = wN;
     }
-
     public void setBorrowed(boolean T) {
         borrowed = T;
     }
 
-    public Book() {
-        bookId = -1;
-        bookName = "";
-        writerName = "";
-        borrowed = false;
+    public int getID(){
+        return bookId;
+    }
+    public String getName(){
+        return bookName;
+    }
+    public String getwriterName(){
+        return writerName;
+    }
+    public boolean isBorrowed() {
+        return borrowed;
     }
 
-    public Book(int id, String bN, String wN, boolean isBr){
-        bookId = id;
-        bookName = bN;
-        writerName = wN;
-        borrowed = isBr;
-    }
 }
 
 class User_Book_Lent{
-    private int bookID;
-    private String userName;
-    private String Date;
-    User_Book_Lent(){
+
+    private int bookID; // ID của sách mượn
+    private String userName; // Tên của người mượn
+    private String Date; // Ngày mượn 
+
+    public User_Book_Lent(){
         bookID = -1;
         userName = "";
         Date = "";
@@ -62,6 +63,17 @@ class User_Book_Lent{
         this.userName = name_u;
         this.Date = date;
     }
+
+    public void setId(int id){
+        this.bookID = id;
+    }
+    public void setId(string user){
+        this.userName = user;
+    }
+    public void setId(String date){
+        this.Date = date;
+    } 
+
     public int getID(){
         return bookID;
     }
@@ -80,51 +92,82 @@ class Admin{
         this.name = "";
         this.pass = "";
     }
-    public Admin(String n, String p) {
-        this.name = n;
-        this.pass = p;
+    public Admin(String name, String pass) {
+        this.name = name;
+        this.pass = pass;
     }
-    // public void lentBook() {
-
-    // }
+    public void setname(String name){
+        this.name = name;
+    }
+    public void setpass(String pass){
+        this.pass = pass;
+    }
+    public String getname(){
+        return this.name;
+    }
+    public String getpass(){
+        return this.pass;
+    }
 }
 
 class Library{
     private Vector<Book> books;
-    private Admin admins;
-    private Vector<User_Book_Lent> UBookLents;
-
+    private Vector<User_Book_Lent> list_ULents;
     private int quantity;
     private int capacity;
 
     public Library(){
         books = new Vector<Book>();
         admins = new Admin();
-        UBookLents = new Vector<User_Book_Lent>();
+        list_ULents = new Vector<User_Book_Lent>();
         quantity = 0;
         capacity = 1000;
     }
+
+    public Library(String name, String pass, int quantity, int capacity){
+        this.admins(name,pass);
+        this.quantity = quantity;
+        this.capacity = capacity;
+    }
+
+    void setquan(int quantity){
+        this.quantity = quantity;
+    }
+
+    void setcap(int capacity){
+        this.capacity = capacity;
+    }
+
+    void setAdmin(String name, String pass){
+        this.admins(name,pass);
+    }
+
     public int getCap() {
         return capacity;
     }
+
     public int getQuan() {
         return quantity;
     }
+
+
     public void add_UserBookLent(User_Book_Lent userbooklent){
-        UBookLents.add(userbooklent);
+        list_ULents.add(userbooklent);
     }
 
-    public Vector<User_Book_Lent> getUBookLents(){
-        return UBookLents;
+    public Vector<User_Book_Lent> getlist_ULents(){
+        return list_ULents;
     }
 
     public void add_Book(Book bookNeedAdd){
         books.add(bookNeedAdd);
         quantity++;
     }
+
     public boolean readAdmins() {
         return false;
     }
+
     public boolean readBooks(){
         try {
             FileInputStream booksF = new FileInputStream("books.txt");
@@ -168,6 +211,7 @@ class Library{
             }
         }
     }
+
     public Vector<Book> search_Book(String bookNeedSearch){
         Vector<Book> stringOfBook = new Vector<Book>();
         bookNeedSearch = bookNeedSearch.toLowerCase();
@@ -182,6 +226,7 @@ class Library{
         }
         return stringOfBook;
     }
+
     public boolean saveBooks(){
         try {
             FileOutputStream booksF = new FileOutputStream("books.txt");
