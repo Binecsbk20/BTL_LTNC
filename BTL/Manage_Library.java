@@ -240,15 +240,21 @@ class Library{
 
     }
 
-    public void delete_Book(Book bookNeedDelete){
+    public boolean delete_Book(Book bookNeedDelete){
         int length = books.size();
-        for(int indexOfBook = 0; indexOfBook < length; indexOfBook++){
-            if(books.get(indexOfBook) == bookNeedDelete){
+        boolean checkAns = false;
+        for(int indexOfBook = length - 1; indexOfBook >= 0; indexOfBook--){
+            Book current = books.get(indexOfBook);
+            if(current.getID() == bookNeedDelete.getID() &&
+                current.getName().equals(bookNeedDelete.getName()) &&
+                    current.getwriterName().equals(bookNeedDelete.getwriterName()) &&
+                        current.isBorrowed() == bookNeedDelete.isBorrowed()){
                 books.remove(indexOfBook);
                 quantity--;
-                return;
+                checkAns = true;
             }
         }
+        return checkAns;
     }
 
     public Vector<Book> search_Book(String bookNeedSearch){
@@ -322,8 +328,9 @@ public class Manage_Library {
             System.out.println("isn't Admin!");
             return;
         }
-        Book book1 = new Book(100, "book100", "tdx", false);
+        Book book1 = new Book(2, "b", "B", false);
         // newLib.add_Book(book1);
+        //50@Atonement@Ian McEwan@0
         newLib.delete_Book(book1);
         newLib.saveData();
 
