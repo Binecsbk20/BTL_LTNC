@@ -164,9 +164,14 @@ class Library{
         return list_ULents;
     }
 
-    public void add_Book(Book bookNeedAdd){
-        books.add(bookNeedAdd);
-        quantity++;
+    public void add_Book(Book needToAdd){
+        books.add(needToAdd);
+
+    }
+    //add book use name
+    public void add_Book(String nameNewBook, String nameNewWriter){
+        Book needToAdd = new Book(this.books.lastElement().getID() + 1, nameNewBook, nameNewWriter, false);
+        books.add(needToAdd);
     }
 
     public boolean isAdmins(Admin admin) {
@@ -271,7 +276,42 @@ class Library{
         }
         return stringOfBook;
     }
-
+    public boolean borrowBook(String UserName, String Date, Book bookNeededBorrow){
+        if(bookNeededBorrow.isBorrowed() == true) return false;
+        UserBookLent user = new UserBookLent(-1, UserName, Date);
+        int length = books.size();
+        boolean checkAns = false;
+        for(int indexOfBook = length - 1; indexOfBook >= 0; indexOfBook--){
+            Book current = books.get(indexOfBook);
+            if(current.getID() == bookNeededBorrow.getID() &&
+                    current.getName().equals(bookNeededBorrow.getName()) &&
+                    current.getwriterName().equals(bookNeededBorrow.getwriterName()) &&
+                    current.isBorrowed() == bookNeededBorrow.isBorrowed()){
+                current.setBorrowed(true);
+                books.set(indexOfBook, current);
+                user.setId(current.getID());
+                list_ULents.add(user);
+                checkAns = true;
+            }
+        }
+        return checkAns;
+    }
+    public boolean borrowBook(String UserName, String Date, int idOfBook){
+        int length = books.size();
+        boolean checkAns = false;
+        UserBookLent user = new UserBookLent(-1, UserName, Date);
+        for(int indexOfBook = length - 1; indexOfBook >= 0; indexOfBook--){
+            Book current = books.get(indexOfBook);
+            if(current.getID() == idOfBook){
+                current.setBorrowed(true);
+                books.set(indexOfBook, current);
+                user.setId(current.getID());
+                list_ULents.add(user);
+                checkAns = true;
+            }
+        }
+        return checkAns;
+    }
     public boolean saveData(){
         try {
             FileOutputStream booksF = new FileOutputStream("books.txt");
@@ -328,10 +368,11 @@ public class Manage_Library {
             System.out.println("isn't Admin!");
             return;
         }
-        Book book1 = new Book(2, "b", "B", false);
+        // Book book1 = new Book(2, "b", "B", false);
         // newLib.add_Book(book1);
         //50@Atonement@Ian McEwan@0
-        newLib.delete_Book(book1);
+        // newLib.delete_Book(book1);
+        newLib.add_Book("GiaiTich2", "NguyenThiXuanAnh");
         newLib.saveData();
 
 
