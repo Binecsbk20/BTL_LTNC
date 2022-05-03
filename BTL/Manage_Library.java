@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-
+import java.text.*;
 class Book{
     private int bookId;
     private String bookName;
@@ -244,7 +244,17 @@ class Library{
         }
 
     }
-
+    public boolean changePass (Admin admin, String newpass) {
+        if (isAdmins(admin)) {
+            for (int i = 0; i < this.admins.size(); i++) {
+                if (admins.get(i).getName().equals(admin.getName())) {
+                    admins.get(i).setPass(newpass);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public boolean delete_Book(Book bookNeedDelete){
         int length = books.size();
         boolean checkAns = false;
@@ -276,9 +286,16 @@ class Library{
         }
         return stringOfBook;
     }
-    public boolean borrowBook(String UserName, String Date, Book bookNeededBorrow){
+    public boolean borrowBook(String UserName, Book bookNeededBorrow){
         if(bookNeededBorrow.isBorrowed() == true) return false;
-        UserBookLent user = new UserBookLent(-1, UserName, Date);
+
+        //getDate
+        SimpleDateFormat formatDate = new SimpleDateFormat(
+            "dd/MM/yyyy  HH:mm:ss z"); 
+        Date date = new Date();
+        formatDate.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+
+        UserBookLent user = new UserBookLent(-1, UserName, formatDate.format(date));
         int length = books.size();
         boolean checkAns = false;
         for(int indexOfBook = length - 1; indexOfBook >= 0; indexOfBook--){
@@ -296,20 +313,29 @@ class Library{
         }
         return checkAns;
     }
-    public boolean borrowBook(String UserName, String Date, int idOfBook){
+    public boolean borrowBook(String UserName, int idOfBook){
+        SimpleDateFormat formatDate = new SimpleDateFormat(
+            "dd/MM/yyyy  HH:mm:ss z"); 
+        Date date = new Date();
+        formatDate.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+        
         int length = books.size();
         boolean checkAns = false;
-        UserBookLent user = new UserBookLent(-1, UserName, Date);
+        UserBookLent user = new UserBookLent(-1, UserName, "");
         for(int indexOfBook = length - 1; indexOfBook >= 0; indexOfBook--){
             Book current = books.get(indexOfBook);
             if(current.getID() == idOfBook){
                 current.setBorrowed(true);
                 books.set(indexOfBook, current);
                 user.setId(current.getID());
+                user.setDate(formatDate.format(date));
                 list_ULents.add(user);
                 checkAns = true;
+                System.out.println("Borrowed!");
+                return checkAns;
             }
         }
+        System.out.println("Can't borrow!");
         return checkAns;
     }
     public boolean saveData(){
@@ -320,27 +346,27 @@ class Library{
             booksF.write(("").getBytes());
             adminsF.write(("").getBytes());
             usersF.write(("").getBytes());
-            for (int i = 0; i < quantity; i++) {
+            for (int i = 0; i < books.size(); i++) {
                 String line = books.get(i).getID() + "@" 
                             + books.get(i).getName() + "@" 
                             + books.get(i).getwriterName() + "@"
                             + (books.get(i).isBorrowed() ? "1" : "0");
                 booksF.write(line.getBytes());
-                if (i != quantity - 1) booksF.write("\n".getBytes());
+                if (i != books.size() - 1) booksF.write("\n".getBytes());
             }
             for (int i = 0; i < this.admins.size(); i++) {
                 String line = admins.get(i).getName() + "@" 
                             + admins.get(i).getPass();
                 adminsF.write(line.getBytes());
-                adminsF.write("\n".getBytes());
+                // adminsF.write("\n".getBytes());
                 if (i != this.admins.size() - 1) adminsF.write("\n".getBytes());
             }
             for (int i = 0; i < this.list_ULents.size(); i++) {
                 String line = list_ULents.get(i).getID() + "@" 
-                            + list_ULents.get(i).getDate() + "@" 
-                            + list_ULents.get(i).getID();
+                            + list_ULents.get(i).getName_user() + "@" 
+                            + list_ULents.get(i).getDate();
                 usersF.write(line.getBytes());
-                if (i != this.admins.size() - 1) usersF.write("\n".getBytes());
+                if (i != this.list_ULents.size() - 1) usersF.write("\n".getBytes());
             }
             booksF.close();
             adminsF.close();
@@ -359,47 +385,11 @@ class Library{
 
 public class Manage_Library {
     public static void main(String[] args){
+    
         Library newLib = new Library();
         newLib.readData();
-        Admin newAdmin = new Admin("admin", "admin");
-        if (newLib.isAdmins(newAdmin)) {
-            System.out.println("is Admin!");
-        } else  {
-            System.out.println("isn't Admin!");
-            return;
-        }
-        // Book book1 = new Book(2, "b", "B", false);
-        // newLib.add_Book(book1);
-        //50@Atonement@Ian McEwan@0
-        // newLib.delete_Book(book1);
-        newLib.add_Book("GiaiTich2", "NguyenThiXuanAnh");
+        // newLib.add_Book("GT2", "thanhdx");
+        newLib.borrowBook("Thanh", 3);
         newLib.saveData();
-
-
-
-        // Manage_Library K = new Manage_Library();
-        // K.readBook();
-        // Win.saveBook();
-
-        // add_Book(book1);
-
-        // Vector<Book> result = search_Book("b");
-        // System.out.println("Find \"b\": ");
-        // if(result.isEmpty()) System.out.println("Not found.");
-        // else{
-        //     for(Book i : result){
-        //         System.out.println(i.bookId + " " + i.bookName + " " + i.writerName);
-        //     }
-        // }
-        // add_Book(book2);
-        // add_Book(book3);
-        // result = search_Book("c");
-        // System.out.println("Find \"c\": ");
-        // if(result.isEmpty()) System.out.println("Not found.");
-        // else{
-        //     for(Book i : result){
-        //         System.out.println(i.bookId + " " + i.bookName + " " + i.writerName);
-        //     }
-        // }
     }
 }
